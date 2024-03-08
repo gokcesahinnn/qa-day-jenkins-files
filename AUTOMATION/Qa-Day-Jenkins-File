@@ -34,13 +34,12 @@ pipeline {
         }
         stage('Running Test') {
             steps {
-             script {
+                echo 'Hello World'
                 sh """
                 bundle install
                 bundle update
                        bundle exec parallel_cucumber -n ${params.ThreadCount.toInteger()} -o '-p parallel --tags "${TagName}" headless=${Headless} browser=${Browser} --retry ${params.Retry.toInteger()}'
                        """
-             }
             }
         }
     }
