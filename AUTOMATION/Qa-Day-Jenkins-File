@@ -6,7 +6,6 @@ pipeline {
         choice(name: 'Headless', choices: ['true', 'false'], description: '')
         string(name: 'TagName', defaultValue: '@smoke', description: '')
         choice(name: 'Browser', choices: ['chrome','remote-chrome','firefox'], description: '')
-        string(name: 'Environment', defaultValue: 'qa', description: 'qa or test')
         string(name: 'ThreadCount', defaultValue: '1', description: '')
         string(name: 'Retry', defaultValue: '1', description: '')
             gitParameter name: 'BRANCH_TAG',
@@ -37,7 +36,9 @@ pipeline {
             steps {
              script {
                 sh """
-                       bundle exec parallel_cucumber -n ${params.ThreadCount.toInteger()} -o '-p parallel headless=${Headless} browser=${Browser} env=${params.Environment} jenkins_build_url=${env.JOB_URL}${BUILD_NUMBER} --retry ${params.Retry.toInteger()}' --group-by scenarios `cat ${replayedInfo.rerunFile}`
+                bundle install
+                bundle update
+                       bundle exec parallel_cucumber -n ${params.ThreadCount.toInteger()} -o '-p parallel --tags "${TagName}" headless=${Headless} browser=${Browser} --retry ${params.Retry.toInteger()}'
                        """
              }
             }
