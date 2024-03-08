@@ -1,6 +1,6 @@
 def reportName = "Local Web"
 pipeline {
-    agent { label 'master' }
+    agent { label 'Built-In Node' }
         parameters {
         choice(name: 'Headless', choices: ['true', 'false'], description: '')
         string(name: 'TagName', defaultValue: '@smoke', description: '')
