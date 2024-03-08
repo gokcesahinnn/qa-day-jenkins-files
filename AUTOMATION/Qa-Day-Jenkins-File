@@ -1,5 +1,4 @@
 def reportName = "Local Web"
-library 'local'
 pipeline {
     agent { label 'test' }
         parameters {
@@ -28,7 +27,7 @@ pipeline {
                             extensions: [],
                             gitTool: 'default',
                             submoduleCfg: [],
-                            userRemoteConfigs: [[credentialsId:'qa-day-ruby-capybara',url: 'https://github.com/gokcesahinnn/web-test-automation-ruby-base-project.git']]
+                            userRemoteConfigs: [[credentialsId:'qa-day-ruby-capybara', url: 'https://github.com/gokcesahinnn/web-test-automation-ruby-base-project.git']]
                         ])
             }
         }
