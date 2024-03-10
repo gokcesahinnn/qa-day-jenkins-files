@@ -18,6 +18,9 @@ pipeline {
                         useRepository: '.*.git',
                         description: 'Select your branch'
     }
+        environment {
+          MY_PASSWORD = "199044"
+        }
     stages {
         stage('Checkout') {
             steps {
@@ -34,7 +37,6 @@ pipeline {
         stage('Running Test') {
             steps {
                 sh """
-                MY_PASSWORD = "199044"
                 "echo ${MY_PASSWORD} | sudo -S bundle install"
                        bundle exec parallel_cucumber -n ${params.ThreadCount.toInteger()} -o '-p parallel --tags "${TagName}" headless=${Headless} browser=${Browser} --retry ${params.Retry.toInteger()}'
                        """
