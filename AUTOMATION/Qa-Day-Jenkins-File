@@ -18,8 +18,8 @@ pipeline {
                         useRepository: '.*.git',
                         description: 'Select your branch'
     }
-    environment{
-    PATH= '/Users/gsahin/.rbenv/shims/ruby'
+    environment {
+    PATH = '/Users/gsahin/.rbenv/shims/ruby'
     }
 
     stages {
