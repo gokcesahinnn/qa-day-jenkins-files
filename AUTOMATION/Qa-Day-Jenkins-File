@@ -40,4 +40,15 @@ pipeline {
             }
         }
     }
+        post {
+            always {
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'test/output/allure-results']]
+                ])
+            }
+        }
 }
