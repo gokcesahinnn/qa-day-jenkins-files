@@ -18,7 +18,6 @@ pipeline {
                         useRepository: '.*.git',
                         description: 'Select your branch'
     }
-
     stages {
         stage('QaDay') {
             steps {
@@ -35,7 +34,7 @@ pipeline {
         stage('Install Gem And Running Test') {
             steps {
                 sh """
-                echo '199044' | sudo -S gem install bundler
+                gem install bundler
                 bundle install
                        bundle exec parallel_cucumber -n ${params.ThreadCount.toInteger()} -o '-p parallel --tags "${TagName}" headless=${Headless} browser=${Browser} --retry ${params.Retry.toInteger()}'
                        """
