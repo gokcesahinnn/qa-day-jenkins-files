@@ -18,8 +18,12 @@ pipeline {
                         useRepository: '.*.git',
                         description: 'Select your branch'
     }
+    environment{
+    PATH= '/Users/gsahin/.rbenv/shims/ruby'
+    }
+
     stages {
-        stage('Checkout') {
+        stage('Qa-Day') {
             steps {
                 checkout([$class: 'GitSCM',
                            branches: [[name: "${params.BRANCH_TAG}"]],
@@ -31,7 +35,7 @@ pipeline {
                         ])
             }
         }
-        stage('Running Test') {
+        stage('Install Gem And Running Test') {
             steps {
                 sh """
                 echo '199044' | sudo -S gem install bundler
