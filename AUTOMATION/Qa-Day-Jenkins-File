@@ -19,9 +19,9 @@ pipeline {
                         description: 'Select your branch'
     }
     stages {
-        stage('QaDay') {
+        stage('Qaday') {
             steps {
-                checkout([$class: 'GitSCM',
+                Qaday([$class: 'GitSCM',
                            branches: [[name: "${params.BRANCH_TAG}"]],
                             doGenerateSubmoduleConfigurations: false,
                             extensions: [],
@@ -31,10 +31,10 @@ pipeline {
                         ])
             }
         }
-        stage('Install Gem And Running Test') {
+        stage('Running Test') {
             steps {
                 sh """
-                gem install bundler
+                sudo gem install bundler
                 bundle install
                        bundle exec parallel_cucumber -n ${params.ThreadCount.toInteger()} -o '-p parallel --tags "${TagName}" headless=${Headless} browser=${Browser} --retry ${params.Retry.toInteger()}'
                        """
