@@ -21,7 +21,7 @@ pipeline {
     stages {
         stage('Slack Notification') {
             steps {
-                color: "#7aabcc"
+                color: "#7aabcc",
                 message:":information_source: ${reportName} REGRESSION job has been started at test env. => (<${env.JOB_URL}${BUILD_NUMBER}|Build Link>)"
             }
         }
